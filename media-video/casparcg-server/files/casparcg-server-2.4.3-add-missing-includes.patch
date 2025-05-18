@@ -1,0 +1,62 @@
+From 7a4a52784e7b93f1328a7e0b7e92203bdca644a9 Mon Sep 17 00:00:00 2001
+From: Julian Waller <git@julusian.co.uk>
+Date: Tue, 22 Apr 2025 19:46:35 +0100
+Subject: [PATCH] chore: add missing includes
+Path: https://github.com/CasparCG/server/commit/7a4a52784e7b93f1328a7e0b7e92203bdca644a9
+
+---
+ src/common/filesystem.cpp                       | 1 +
+ src/common/log.cpp                              | 1 +
+ src/modules/decklink/consumer/config.h          | 2 ++
+ src/modules/ffmpeg/consumer/ffmpeg_consumer.cpp | 1 +
+ 4 files changed, 5 insertions(+)
+
+diff --git a/common/filesystem.cpp b/common/filesystem.cpp
+index 5fbc59fe19..4788582492 100644
+--- a/common/filesystem.cpp
++++ b/common/filesystem.cpp
+@@ -26,6 +26,7 @@
+ #include <boost/algorithm/string.hpp>
+ #include <boost/filesystem/operations.hpp>
+ #include <boost/filesystem/path.hpp>
++#include <boost/filesystem/directory.hpp>
+ 
+ namespace caspar {
+ 
+diff --git a/common/log.cpp b/common/log.cpp
+index 8f4934c37d..e27e13a1af 100644
+--- a/common/log.cpp
++++ b/common/log.cpp
+@@ -26,6 +26,7 @@
+ #include <boost/algorithm/string/replace.hpp>
+ #include <boost/core/null_deleter.hpp>
+ #include <boost/filesystem/operations.hpp>
++#include <boost/lexical_cast.hpp>
+ #include <boost/locale.hpp>
+ #include <boost/log/attributes/function.hpp>
+ #include <boost/log/core.hpp>
+diff --git a/modules/decklink/consumer/config.h b/modules/decklink/consumer/config.h
+index a51e66f6b5..295bfada79 100644
+--- a/modules/decklink/consumer/config.h
++++ b/modules/decklink/consumer/config.h
+@@ -21,6 +21,8 @@
+ 
+ #pragma once
+ 
++#include <boost/property_tree/ptree.hpp>
++
+ #include <core/video_format.h>
+ 
+ namespace caspar { namespace decklink {
+diff --git a/modules/ffmpeg/consumer/ffmpeg_consumer.cpp b/modules/ffmpeg/consumer/ffmpeg_consumer.cpp
+index 82ff3097ee..886de00c1d 100644
+--- a/modules/ffmpeg/consumer/ffmpeg_consumer.cpp
++++ b/modules/ffmpeg/consumer/ffmpeg_consumer.cpp
+@@ -74,6 +74,7 @@ extern "C" {
+ #include <tbb/parallel_invoke.h>
+ 
+ #include <memory>
++#include <optional>
+ #include <thread>
+ 
+ namespace caspar { namespace ffmpeg {

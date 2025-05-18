@@ -1,0 +1,26 @@
+diff --git a/core/CMakeLists.txt b/core/CMakeLists.txt
+index 4e438488e..17032611d 100644
+--- a/core/CMakeLists.txt
++++ b/core/CMakeLists.txt
+@@ -99,4 +99,8 @@ source_group(sources\\producer\\route producer/route/*)
+ source_group(sources\\producer\\transition producer/transition/*)
+ source_group(sources\\producer\\separated producer/separated/*)
+ 
+-target_link_libraries(core common)
++target_link_libraries(
++	core
++	${SFML_LIBRARIES}
++	common
++)
+diff --git a/shell/CMakeLists.txt b/shell/CMakeLists.txt
+index ed09ff3a7..400d4a05a 100644
+--- a/shell/CMakeLists.txt
++++ b/shell/CMakeLists.txt
+@@ -82,7 +82,6 @@ else ()
+ 	target_link_libraries(casparcg
+ 		${Boost_LIBRARIES}
+ 		${TBB_LIBRARIES}
+-		${SFML_LIBRARIES}
+ 		${GLEW_LIBRARIES}
+ 		OpenGL::GL
+ 		${X11_LIBRARIES}

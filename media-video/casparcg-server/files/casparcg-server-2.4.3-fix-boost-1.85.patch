@@ -1,0 +1,101 @@
+From dec1a455afcf2de9a7dd945bf65c059800f048d9 Mon Sep 17 00:00:00 2001
+From: Oscar Cowdery Lack <oscar@lightningvisuals.com>
+Date: Wed, 16 Oct 2024 11:50:05 +1100
+Subject: [PATCH 1/2] fix: Fix build with boost 1.85
+
+PR: https://github.com/CasparCG/server/pull/1584
+
+- Remove <boost/filesystem/convenience.hpp> header that has been removed
+  from boost
+- Replace deprecated filesystem::complete with filesystem::absolute
+- Replace path::is_complete() with path::is_absolute()
+- Replace path::leaf() with path::filename()
+---
+ src/common/env.cpp                              | 2 +-
+ src/common/os/linux/filesystem.cpp              | 2 +-
+ src/common/stdafx.h                             | 1 -
+ src/modules/ffmpeg/consumer/ffmpeg_consumer.cpp | 2 +-
+ 4 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/common/env.cpp b/common/env.cpp
+index 54a58c9fdc..1f9c870bbc 100644
+--- a/common/env.cpp
++++ b/common/env.cpp
+@@ -109,7 +109,7 @@ void configure(const std::wstring& filename)
+         }
+ 
+         ftemplate =
+-            clean_path(boost::filesystem::complete(paths.get(L"template-path", initial + L"/template/")).wstring());
++            clean_path(boost::filesystem::absolute(paths.get(L"template-path", initial + L"/template/")).wstring());
+         data = clean_path(paths.get(L"data-path", initial + L"/data/"));
+     } catch (...) {
+         CASPAR_LOG(error) << L" ### Invalid configuration file. ###";
+diff --git a/common/os/linux/filesystem.cpp b/common/os/linux/filesystem.cpp
+index 835114889a..d0f63fbab0 100644
+--- a/common/os/linux/filesystem.cpp
++++ b/common/os/linux/filesystem.cpp
+@@ -51,7 +51,7 @@ std::optional<std::wstring> find_case_insensitive(const std::wstring& case_insen
+             bool found = false;
+ 
+             for (auto it = directory_iterator(absolute(result)); it != directory_iterator(); ++it) {
+-                auto leaf = it->path().leaf();
++                auto leaf = it->path().filename();
+ 
+                 if (boost::algorithm::iequals(part.wstring(), leaf.wstring(), loc)) {
+                     result = result / leaf;
+diff --git a/common/stdafx.h b/common/stdafx.h
+index 050907c45b..767a2f7173 100644
+--- a/common/stdafx.h
++++ b/common/stdafx.h
+@@ -33,7 +33,6 @@
+ #include <boost/date_time/posix_time/posix_time.hpp>
+ #include <boost/exception/all.hpp>
+ #include <boost/filesystem.hpp>
+-#include <boost/filesystem/convenience.hpp>
+ #include <boost/filesystem/fstream.hpp>
+ #include <boost/filesystem/operations.hpp>
+ #include <boost/filesystem/path.hpp>
+diff --git a/modules/ffmpeg/consumer/ffmpeg_consumer.cpp b/modules/ffmpeg/consumer/ffmpeg_consumer.cpp
+index 1e38d3d4d4..c6cc9fba94 100644
+--- a/modules/ffmpeg/consumer/ffmpeg_consumer.cpp
++++ b/modules/ffmpeg/consumer/ffmpeg_consumer.cpp
+@@ -543,7 +543,7 @@ struct ffmpeg_consumer : public core::frame_consumer
+ 
+                 static boost::regex prot_exp("^.+:.*");
+                 if (!boost::regex_match(path_, prot_exp)) {
+-                    if (!full_path.is_complete()) {
++                    if (!full_path.is_absolute()) {
+                         full_path = u8(env::media_folder()) + path_;
+                     }
+ 
+
+From 51ac83d8aa99d12727efb13bdd9d640a1ab9f737 Mon Sep 17 00:00:00 2001
+From: Oscar Cowdery Lack <oscar@lightningvisuals.com>
+Date: Sat, 2 Nov 2024 07:15:08 +1100
+Subject: [PATCH 2/2] fix: Fix build with boost 1.86
+
+- Fix resolution of boost::asio::spawn overload.
+  See https://github.com/chriskohlhoff/asio/issues/1524
+---
+ src/accelerator/ogl/util/device.cpp | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/accelerator/ogl/util/device.cpp b/accelerator/ogl/util/device.cpp
+index 31a9133940..7598c2873d 100644
+--- a/accelerator/ogl/util/device.cpp
++++ b/accelerator/ogl/util/device.cpp
+@@ -150,7 +150,13 @@ struct device::impl : public std::enable_shared_from_this<impl>
+ 
+         auto task   = task_type(std::forward<Func>(func));
+         auto future = task.get_future();
+-        boost::asio::spawn(service_, std::move(task));
++        boost::asio::spawn(service_, std::move(task)
++#if BOOST_VERSION >= 108000
++            , [](std::exception_ptr e) {
++                if (e) std::rethrow_exception(e);
++            }
++#endif
++        );
+         return future;
+     }
+ 

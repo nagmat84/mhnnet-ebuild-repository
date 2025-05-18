@@ -1,0 +1,6 @@
+[Unit]
+Description=CasparCG Server Service
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/casparcg %h/.casparcg/casparcg.config

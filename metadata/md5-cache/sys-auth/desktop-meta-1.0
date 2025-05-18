@@ -1,0 +1,10 @@
+DEFINED_PHASES=postinst
+DESCRIPTION=Pulls in required system utilities and deamons for desktop environments
+EAPI=8
+HOMEPAGE=https://www.mhnnet.de/
+IUSE=geoclue geolocation modemmanager zeroconf
+KEYWORDS=amd64 x86
+LICENSE=metapackage
+RDEPEND=geoclue? ( zeroconf? ( sys-auth/nss-mdns ) ) geolocation? ( zeroconf? ( sys-auth/nss-mdns ) ) sys-auth/rtkit
+SLOT=0
+_md5_=1a6e3a7b05e4544e7c72b014d8f8c43c
