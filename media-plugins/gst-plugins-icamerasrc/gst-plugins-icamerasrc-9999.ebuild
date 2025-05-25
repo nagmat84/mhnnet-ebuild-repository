@@ -18,10 +18,10 @@ DEPEND="
 "
 BDEPEND="
 	virtual/pkgconfig
-	sys-devel/autoconf
-	sys-devel/automake
-	sys-devel/libtool
-	dev-util/cmake
+	dev-build/autoconf
+	dev-build/automake
+	dev-build/libtool
+	dev-build/cmake
 	dev-vcs/git
 "
 
