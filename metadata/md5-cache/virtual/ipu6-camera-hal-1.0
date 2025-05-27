@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DESCRIPTION=Intel IPU6 camera HAL
+EAPI=8
+HOMEPAGE=https://github.com/intel/ipu6-camera-hal
+IUSE=alderlake arrowlake meteorlake raptorlake
+KEYWORDS=~amd64
+LICENSE=unknown
+RDEPEND=alderlake? ( sys-libs/ipu6-camera-hal-arl-twl-asl ) arrowlake? ( sys-libs/ipu6-camera-hal-arl-twl-asl ) meteorlake? ( sys-libs/ipu6-camera-hal-mtl-rpl[meteorlake] ) raptorlake? ( sys-libs/ipu6-camera-hal-mtl-rpl[raptorlake] )
+REQUIRED_USE=^^ ( alderlake arrowlake meteorlake raptorlake )
+SLOT=0
+_md5_=08e80cb4c62e0ad08af1c9eeb7b48232

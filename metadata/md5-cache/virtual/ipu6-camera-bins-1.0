@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DESCRIPTION=Intel IPU6 camera binaries
+EAPI=8
+HOMEPAGE=https://github.com/intel/ipu6-camera-bins
+IUSE=alderlake arrowlake meteorlake raptorlake
+KEYWORDS=~amd64
+LICENSE=unknown
+RDEPEND=alderlake? ( sys-firmware/ipu6-camera-bins-arl-twl-asl ) arrowlake? ( sys-firmware/ipu6-camera-bins-arl-twl-asl ) meteorlake? ( sys-firmware/ipu6-camera-bins-mtl-rpl ) raptorlake? ( sys-firmware/ipu6-camera-bins-mtl-rpl )
+REQUIRED_USE=^^ ( alderlake arrowlake meteorlake raptorlake )
+SLOT=0
+_md5_=c44d19fab648933551452ca76c1a9b9e

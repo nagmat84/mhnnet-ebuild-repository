@@ -5,3 +5,6 @@ media-gfx
 media-plugins
 media-video
 sys-auth
+sys-firmware
+sys-libs
+virtual
