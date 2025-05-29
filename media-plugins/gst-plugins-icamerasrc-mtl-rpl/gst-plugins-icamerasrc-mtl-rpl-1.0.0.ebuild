@@ -1,28 +1,40 @@
 EAPI=8
 
-inherit autotools git-r3 udev
+inherit autotools udev
 
-DESCRIPTION="Intel IPU6 camera source for GStreamer"
+DESCRIPTION="Intel IPU6 camera source for GStreamer (Meteor Lake/Raptor Lake)"
 HOMEPAGE="https://github.com/intel/icamerasrc"
-EGIT_REPO_URI="https://github.com/intel/icamerasrc.git"
-EGIT_BRANCH="icamerasrc_slim_api"
+SRC_URI="https://github.com/intel/icamerasrc/archive/refs/tags/v${PV}-iot-mtl-rpl-v6.12.tar.gz -> ${P}.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND="
-	media-libs/gstreamer:1.0
-	media-libs/gst-plugins-base:1.0
-	x11-libs/libdrm
-"
+RESTRICT="mirror"
+
 BDEPEND="
 	virtual/pkgconfig
 	dev-build/autoconf
 	dev-build/automake
 	dev-build/libtool
-	dev-build/cmake
-	dev-vcs/git
+"
+
+DEPEND="
+	acct-group/video
+	media-libs/gstreamer:1.0
+	media-libs/gst-plugins-base:1.0
+	media-libs/gst-plugins-bad:1.0
+	media-libs/libva
+	sys-firmware/ipu6-camera-bins-mtl-rpl
+	sys-libs/ipu6-camera-hal-mtl-rpl
+	x11-libs/libdrm
+"
+
+S="${WORKDIR}/icamerasrc-${PV}-iot-mtl-rpl-v6.12"
+
+RDEPEND="
+	${DEPEND}
+	!media-plugins/gst-plugins-icamerasrc-arl-twl-asl
 "
 
 src_prepare() {
@@ -37,9 +49,7 @@ src_configure() {
 	export CHROME_SLIM_CAMHAL=ON
 	export STRIP_VIRTUAL_CHANNEL_CAMHAL=ON
 	export DEFAULT_CAMERA=0
-	local mycmakeargs=(
-	)
-	econf
+	econf --enable-gstdrmformat=yes
 }
 
 src_install() {

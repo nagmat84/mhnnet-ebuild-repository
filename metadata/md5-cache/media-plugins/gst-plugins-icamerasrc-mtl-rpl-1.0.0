@@ -1,0 +1,15 @@
+BDEPEND=virtual/pkgconfig dev-build/autoconf dev-build/automake dev-build/libtool sys-devel/gnuconfig >=app-portage/elt-patches-20250306 || ( >=dev-build/automake-1.18:1.18 >=dev-build/automake-1.17-r1:1.17 ) || ( >=dev-build/autoconf-2.72-r1:2.72 ) >=dev-build/libtool-2.4.7-r3 virtual/pkgconfig
+DEFINED_PHASES=configure install postinst prepare
+DEPEND=acct-group/video media-libs/gstreamer:1.0 media-libs/gst-plugins-base:1.0 media-libs/gst-plugins-bad:1.0 media-libs/libva sys-firmware/ipu6-camera-bins-mtl-rpl sys-libs/ipu6-camera-hal-mtl-rpl x11-libs/libdrm
+DESCRIPTION=Intel IPU6 camera source for GStreamer (Meteor Lake/Raptor Lake)
+EAPI=8
+HOMEPAGE=https://github.com/intel/icamerasrc
+INHERIT=autotools udev
+KEYWORDS=~amd64
+LICENSE=LGPL-2.1
+RDEPEND=acct-group/video media-libs/gstreamer:1.0 media-libs/gst-plugins-base:1.0 media-libs/gst-plugins-bad:1.0 media-libs/libva sys-firmware/ipu6-camera-bins-mtl-rpl sys-libs/ipu6-camera-hal-mtl-rpl x11-libs/libdrm !media-plugins/gst-plugins-icamerasrc-arl-twl-asl
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/intel/icamerasrc/archive/refs/tags/v1.0.0-iot-mtl-rpl-v6.12.tar.gz -> gst-plugins-icamerasrc-mtl-rpl-1.0.0.tar.gz
+_eclasses_=autotools	216128ca9bbff45fbea22427005310c7	gnuconfig	ddeb9f8caff1b5f71a09c75b7534df79	libtool	c81bd096be5f4c82f4e8f156ef112402	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	udev	f3d9a4376ebd22131726a68e1a0a058f
+_md5_=723bbb35ef177d48eb8584ed1d1c0c29
