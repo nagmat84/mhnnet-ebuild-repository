@@ -15,7 +15,12 @@ RESTRICT="mirror"
 
 IUSE="debug drm gnutls gstreamer jpeg libevent libyuv python qt6 sdl tiff trace udev unwind v4l2"
 
-BDEPEND="|| ( net-libs/gnutls dev-libs/openssl )"
+BDEPEND="
+	|| ( net-libs/gnutls dev-libs/openssl )
+	dev-python/jinja2
+	dev-python/ply
+	dev-python/pyyaml
+"
 
 DEPEND="
 	dev-libs/libyaml:=

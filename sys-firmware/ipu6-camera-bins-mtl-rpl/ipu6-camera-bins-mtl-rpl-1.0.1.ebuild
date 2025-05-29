@@ -10,7 +10,11 @@ KEYWORDS="~amd64"
 RESTRICT="mirror"
 
 BDEPEND="dev-util/patchelf"
-DEPEND="sys-libs/glibc"
+DEPEND="
+	dev-libs/expat
+	sys-libs/glibc
+	sys-libs/zlib
+"
 RDEPEND="
 	${DEPEND}
 	!sys-firmware/ipu6-camera-bins-arl-twl-asl
@@ -29,5 +33,6 @@ src_install() {
 	# Fixing paths
 	for sofile in "${D}/usr/lib64"/*.so*; do
 		patchelf --set-rpath /usr/lib64 "${sofile}"
+		dosym $(basename ${sofile}) /usr/lib64/$(basename -s .0 ${sofile} )
 	done
 }

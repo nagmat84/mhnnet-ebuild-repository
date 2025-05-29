@@ -8,7 +8,9 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="amd64"
 
-RDEPEND="virtual/ipu6-camera-bins
+RDEPEND="
+	virtual/gst-plugins-icamerasrc
+	virtual/ipu6-camera-bins
 	virtual/ipu6-camera-hal
 	media-video/pipewire[libcamera]
 	media-libs/libcamera[gstreamer]
