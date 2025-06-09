@@ -1,0 +1,2 @@
+# systemd is enforced as the alternativ (sysv-utils) has not been tested and is masked
+net-misc/citrix-workspace systemd

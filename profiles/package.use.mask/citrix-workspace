@@ -1,0 +1,3 @@
+# This use-flags are masked, because the ebuild has not been completed for
+# the corresponding features.
+net-misc/citrix-workspace apparmor app-protection gnome microsoft-edge sysv-utils
