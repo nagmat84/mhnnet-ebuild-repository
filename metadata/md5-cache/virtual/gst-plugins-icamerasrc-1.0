@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DESCRIPTION=Intel IPU6 camera HAL
+EAPI=8
+HOMEPAGE=https://github.com/intel/icamerasrc
+IUSE=alderlake arrowlake meteorlake raptorlake
+KEYWORDS=~amd64
+LICENSE=LGPL-2.1
+RDEPEND=alderlake? ( media-plugins/gst-plugins-icamerasrc-arl-twl-asl ) arrowlake? ( media-plugins/gst-plugins-icamerasrc-arl-twl-asl ) meteorlake? ( media-plugins/gst-plugins-icamerasrc-mtl-rpl ) raptorlake? ( media-plugins/gst-plugins-icamerasrc-mtl-rpl )
+REQUIRED_USE=^^ ( alderlake arrowlake meteorlake raptorlake )
+SLOT=0
+_md5_=ecf93dea39fc0b2edcdf8e68ceff4fd3

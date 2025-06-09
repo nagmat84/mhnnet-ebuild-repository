@@ -1,0 +1,17 @@
+BDEPEND=app-alternatives/ninja >=dev-build/cmake-3.20.5
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
+DEPEND=media-libs/libglvnd dev-qt/qtbase:6= dev-qt/qt5compat:6= dev-qt/qtdeclarative:6= dev-qt/qtsvg:6= dev-qt/qttools:6= dev-qt/qtbase:6= sys-libs/glibc sys-devel/gcc
+DESCRIPTION=Open Source 2D CAD
+EAPI=8
+HOMEPAGE=http://www.qcad.org/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=cmake desktop qmake-utils wrapper xdg
+IUSE=l10n_ar l10n_bg l10n_ca l10n_cs l10n_da l10n_de l10n_el l10n_en l10n_es l10n_et l10n_fa l10n_fi l10n_fr l10n_gd l10n_gl l10n_he l10n_hr l10n_hu l10n_id l10n_it l10n_ja l10n_ko l10n_lt l10n_lv l10n_nb l10n_nl l10n_nn l10n_pl l10n_pt l10n_pt_BR l10n_pt_PT l10n_ro l10n_ru l10n_sk l10n_sl l10n_sv l10n_th l10n_tr l10n_uk l10n_zh_CN l10n_zh_TW
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-3
+RDEPEND=media-libs/libglvnd dev-qt/qtbase:6= dev-qt/qt5compat:6= dev-qt/qtdeclarative:6= dev-qt/qtsvg:6= dev-qt/qttools:6= dev-qt/qtbase:6= sys-libs/glibc sys-devel/gcc
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/qcad/qtjsapi/archive/refs/tags/v3.32.2.0.tar.gz -> qtjsapi-3.32.2.0.tar.gz https://github.com/qcad/qcadjsapi/archive/refs/tags/v3.32.2.0.tar.gz -> qcadjsapi-3.32.2.0.tar.gz https://github.com/qcad/qcad/archive/refs/tags/v3.32.2.0.tar.gz -> qcad-3.32.2.0.tar.gz
+_eclasses_=cmake	b05c1b7b3c9213c155f128f4eadaa49f	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	flag-o-matic	b892042b2667b8ac69ec8a2571dc290a	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	qmake-utils	a8dd17b1d94586164f5e3fc12b1c6b81	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	wrapper	11a2a3bd712784986679b60a0cab34a0	xdg	3ef49a87c52c8b77c476351195dfe575	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_md5_=331c40fa3b5c74ee0a8425baec690ef1

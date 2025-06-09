@@ -1,9 +1,0 @@
-DEFINED_PHASES=-
-DESCRIPTION=Pulls in required libraries for Citrix Workspace App
-EAPI=8
-HOMEPAGE=https://www.mhnnet.de/
-KEYWORDS=amd64 x86
-LICENSE=metapackage
-RDEPEND=gui-libs/gtk[cloudproviders] net-libs/webkit-gtk:4/37
-SLOT=0
-_md5_=e72fa45f8c0aa64cadaf2784d588b0e3

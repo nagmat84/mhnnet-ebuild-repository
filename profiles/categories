@@ -1,6 +1,12 @@
 app-office
 app-portage
 kde-apps
+media-gfx
+media-libs
+media-plugins
 media-video
 net-misc
 sys-auth
+sys-firmware
+sys-libs
+virtual

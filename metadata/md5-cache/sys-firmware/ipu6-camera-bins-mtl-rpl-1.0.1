@@ -1,0 +1,13 @@
+BDEPEND=dev-util/patchelf
+DEFINED_PHASES=install
+DEPEND=dev-libs/expat sys-libs/glibc sys-libs/zlib
+DESCRIPTION=Intel IPU6 camera binaries (Meteor/Raptor Lake)
+EAPI=8
+HOMEPAGE=https://github.com/intel/ipu6-camera-bins
+KEYWORDS=~amd64
+LICENSE=unknown
+RDEPEND=dev-libs/expat sys-libs/glibc sys-libs/zlib !sys-firmware/ipu6-camera-bins-arl-twl-asl
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/intel/ipu6-camera-bins/archive/refs/tags/v1.0.1-iot-mtl-rpl-v6.12.tar.gz -> ipu6-camera-bins-mtl-rpl-1.0.1.tar.gz
+_md5_=13164bf4ba642511514cadd91df82c17
