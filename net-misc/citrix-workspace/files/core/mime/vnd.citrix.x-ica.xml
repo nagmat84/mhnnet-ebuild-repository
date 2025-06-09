@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+	<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-ica">
+		<comment>Citrix ICA connection parameters</comment>
+		<acronym>ICA</acronym>
+		<sub-class-of type="text/plain"/>
+		<magic>
+			<match priority="80" type="string" offset="0:999" value="[ApplicationServers]" />
+		</magic>
+		<icon name="citrix-receiver" />
+		<glob pattern="*.ica"/>
+		<glob pattern="*.ICA"/>
+	</mime-type>
+</mime-info>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+	<mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="x-scheme-handler/citrixauthwebviewdone">
+		<comment>Citrix ICA Web View Scheme</comment>
+		<icon name="citrix-receiver" />
+	</mime-type>
+</mime-info>

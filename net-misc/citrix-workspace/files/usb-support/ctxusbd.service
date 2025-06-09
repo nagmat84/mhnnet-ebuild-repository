@@ -1,0 +1,12 @@
+[Unit]
+Description=Citrix Workspace USB Support
+After=systemd-udevd.service
+Requires=systemd-udevd.service
+ConditionPathExists=/dev/bus/usb
+
+[Service]
+ExecStart=/opt/Citrix/ICAClient/ctxusbd
+Type=exec
+
+[Install]
+WantedBy=multi-user.target

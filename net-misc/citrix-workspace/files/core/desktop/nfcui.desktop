@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Citrix Workspace (nfcui)
+NoDisplay=true
+Categories=Application;Network;X-Red-Hat-Base;X-SuSE-Core-Internet;
+Icon=citrix-utility
+TryExec=/opt/Citrix/ICAClient/util/nfcui
