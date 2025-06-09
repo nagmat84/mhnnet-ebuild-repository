@@ -5,6 +5,8 @@ media-gfx
 media-libs
 media-plugins
 media-video
+net-libs
+net-misc
 sys-auth
 sys-firmware
 sys-libs

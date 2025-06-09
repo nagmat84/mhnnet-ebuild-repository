@@ -1,0 +1,6 @@
+# Gentoo has mask Webkit 4.0 (4/37) as Gentoo has moved on to 4.1
+# which is fully API-compliant with Webkit 4.0.
+# But we still need 4.0 for net-misc/citrix-workspace.
+#
+# See https://bugs.gentoo.org/893668.
+net-libs/webkit-gtk:4

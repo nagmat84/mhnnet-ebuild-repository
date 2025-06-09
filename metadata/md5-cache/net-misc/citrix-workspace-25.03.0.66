@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig virtual/pkgconfig
+DEFINED_PHASES=nofetch
+DEPEND=!!<net-misc/citrix-workspace-25.03.0.66[apparmor] app-crypt/libsecret dev-libs/json-c dev-libs/libtar dev-libs/libxml2 dev-libs/openssl dev-libs/xerces-c gui-libs/gtk[cloudproviders] media-libs/alsa-lib media-libs/libpulse media-libs/libvorbis media-libs/speexdsp >=media-libs/libva-2 net-libs/libnsl net-libs/webkit-gtk:4/37 >=sys-libs/glibc-2.27 sys-libs/libcap sys-libs/zlib virtual/udev x11-libs/cairo x11-libs/gdk-pixbuf x11-libs/gtk+:3 apparmor? ( sys-libs/libapparmor ) gnome? ( gnome-base/gnome-shell ) gstreamer? ( media-libs/gstreamer:1.0 ) systemd? ( sys-apps/systemd[apparmor=] ) sysv-utils? ( sys-apps/openrc )
+DESCRIPTION=Citrix Workspace App
+EAPI=8
+HOMEPAGE=https://www.citrix.com/downloads/workspace-app/linux/workspace-app-for-linux-latest.html
+INHERIT=systemd udev user-info
+IUSE=apparmor app-protection chrome device-trust gnome gstreamer microsoft-edge systemd sysv-utils usb
+KEYWORDS=~amd64
+LICENSE=citrix-eula
+RDEPEND=!!<net-misc/citrix-workspace-25.03.0.66[apparmor] app-crypt/libsecret dev-libs/json-c dev-libs/libtar dev-libs/libxml2 dev-libs/openssl dev-libs/xerces-c gui-libs/gtk[cloudproviders] media-libs/alsa-lib media-libs/libpulse media-libs/libvorbis media-libs/speexdsp >=media-libs/libva-2 net-libs/libnsl net-libs/webkit-gtk:4/37 >=sys-libs/glibc-2.27 sys-libs/libcap sys-libs/zlib virtual/udev x11-libs/cairo x11-libs/gdk-pixbuf x11-libs/gtk+:3 apparmor? ( sys-libs/libapparmor ) gnome? ( gnome-base/gnome-shell ) gstreamer? ( media-libs/gstreamer:1.0 ) systemd? ( sys-apps/systemd[apparmor=] ) sysv-utils? ( sys-apps/openrc )
+RESTRICT=fetch mirror
+SLOT=0
+SRC_URI=https://downloads.citrix.com/23334/linuxx64-25.03.0.66.tar.gz -> citrix-workspace-25.03.0.66.tar.gz
+_eclasses_=systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	udev	f3d9a4376ebd22131726a68e1a0a058f	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
+_md5_=90edfccced09b8475754886a52a69b52
