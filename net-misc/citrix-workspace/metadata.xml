@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pkgmetadata>
+	<maintainer type='person'>
+		<email>matthias.nagel@mhnnet.de</email>
+		<name>Matthias H. Nagel</name>
+	</maintainer>
+	<longdescription>
+		Citrix Workspace App for Linux
+	</longdescription>
+	<use>
+		<flag name='apparmor'>Installs AppArmor profiles for Citrix Enterprise Browser (currently masked, requires <pkg>sys-libs/libapparmor</pkg>)</flag>
+		<flag name='app-protection'>Installs the App Protection component (currently masked)</flag>
+		<flag name='chrome'>Installs the Chrome/Chromium browser plug-in</flag>
+		<flag name='device-trust'>Installs the Device Trust Component</flag>
+		<flag name='gnome'>Installs the Multitouch Plug-In for the GNOME desktop (currently masked, requires <pkg>gnome-base/gnome-shell</pkg>)</flag>
+		<flag name='gstreamer'>Enables remote sound playback via GStreamer (requires <pkg>media-libs/gstreamer</pkg>)</flag>
+		<flag name='microsoft-edge'>Installs the Edge browser plug-in</flag>
+		<flag name='systemd'>Installs the SystemD service files and enables them</flag>
+		<flag name='sysv-utils'>Installs the SysV-style init scripts and enables them (currently masked)</flag>
+		<flag name='usb'>Enables USB support</flag>
+	</use>
+	<upstream>
+		<changelog>https://docs.citrix.com/en-us/citrix-workspace-app-for-linux/whats-new</changelog>
+		<doc>https://docs.citrix.com/en-us/citrix-workspace-app-for-linux</doc>
+		<bugs-to>https://discussions.citrix.com/forum/574-receiver-for-linux-13x/</bugs-to>
+	</upstream>
+</pkgmetadata>
