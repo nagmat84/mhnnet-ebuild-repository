@@ -1,0 +1,7 @@
+{
+  "name": "com.citrix.chrome.ipcbridge",
+  "description": "Native Messaging Host for IPC",
+  "path": "/opt/Citrix/ICAClient/ceb/CtxChromiumBrowser/native_bridge",
+  "type": "stdio",
+  "allowed_origins": [ "chrome-extension://gmbmklehihfgponfmjbodllmcacgmaoi/" ]
+}
