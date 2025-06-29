@@ -12,5 +12,5 @@ RDEPEND=!!<net-misc/citrix-workspace-25.03.0.66[apparmor] app-crypt/libsecret de
 RESTRICT=fetch mirror
 SLOT=0
 SRC_URI=https://downloads.citrix.com/23334/linuxx64-25.03.0.66.tar.gz -> citrix-workspace-25.03.0.66.tar.gz
-_eclasses_=systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	udev	f3d9a4376ebd22131726a68e1a0a058f	user-info	9951b1a0e4f026d16c33a001fd2d5cdf
+_eclasses_=systemd	a964c0cbe818b5729da1dbfcee5be861	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	udev	f3d9a4376ebd22131726a68e1a0a058f	user-info	563da40a1a20ea1e55bbf4d149fc190d
 _md5_=90edfccced09b8475754886a52a69b52

@@ -1,0 +1,14 @@
+--- a/src/3rdparty/opennurbs/freetype263/CMakeLists.txt   2025-06-29 14:21:44.597972627 +0200
++++ b/src/3rdparty/opennurbs/freetype263/CMakeLists.txt   2025-06-29 14:24:42.407169744 +0200
+@@ -48,6 +48,11 @@
+     src/winfonts/winfnt.c
+ )
+ 
++if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
++    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
++endif()
++
+ add_library( opennurbs_public_freetype STATIC
+     ${SOURCES}
+ )
