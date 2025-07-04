@@ -19,7 +19,6 @@ RDEPEND="
 	>=kde-apps/okular-${PV}:*
 	>=kde-apps/svgpart-${PV}:*
 	>=kde-apps/thumbnailers-${PV}:*
-	>=media-gfx/qrca-${PV}:*
 	color-management? ( >=kde-misc/colord-kde-${PV}:* )
 	scanner? (
 		>=kde-apps/libksane-${PV}:*
