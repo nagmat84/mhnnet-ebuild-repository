@@ -65,7 +65,9 @@ BDEPEND="dev-util/patchelf"
 # See https://devmanual.gentoo.org/quickstart/index.html#ebuild-with-patches
 PATCHES=(
 	"${FILESDIR}/${P}-add-missing-includes.patch"
+	"${FILESDIR}/${PF}-add-missing-includes.patch"
 	"${FILESDIR}/${P}-fix-boost-1.85.patch"
+	"${FILESDIR}/${PF}-fix-boost-1.88.patch"
 	"${FILESDIR}/${P}-fix-linker-dependencies.patch"
 )
 

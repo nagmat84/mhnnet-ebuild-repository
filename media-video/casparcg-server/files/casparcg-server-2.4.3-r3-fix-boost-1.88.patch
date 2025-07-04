@@ -1,0 +1,251 @@
+--- a/shell/server.cpp   2025-06-30 20:28:26.510305123 +0200
++++ b/shell/server.cpp   2025-06-30 20:30:49.773013557 +0200
+@@ -63,13 +63,13 @@
+ using namespace core;
+ using namespace protocol;
+ 
+-std::shared_ptr<boost::asio::io_service> create_running_io_service()
++std::shared_ptr<boost::asio::io_context> create_running_io_service()
+ {
+-    auto service = std::make_shared<boost::asio::io_service>();
+-    // To keep the io_service::run() running although no pending async
++    auto service = std::make_shared<boost::asio::io_context>();
++    // To keep the io_context::run() running although no pending async
+     // operations are posted.
+-    auto work      = std::make_shared<boost::asio::io_service::work>(*service);
+-    auto weak_work = std::weak_ptr<boost::asio::io_service::work>(work);
++    auto work      = std::make_shared<boost::asio::io_context::work>(*service);
++    auto weak_work = std::weak_ptr<boost::asio::io_context::work>(work);
+     auto thread    = std::make_shared<std::thread>([service, weak_work] {
+         while (auto strong = weak_work.lock()) {
+             try {
+@@ -82,7 +82,7 @@
+         CASPAR_LOG(info) << "[asio] Global io_service uninitialized.";
+     });
+ 
+-    return std::shared_ptr<boost::asio::io_service>(service.get(), [service, work, thread](void*) mutable {
++    return std::shared_ptr<boost::asio::io_context>(service.get(), [service, work, thread](void*) mutable {
+         CASPAR_LOG(info) << "[asio] Shutting down global io_service.";
+         work.reset();
+         service->stop();
+@@ -95,7 +95,7 @@
+ 
+ struct server::impl
+ {
+-    std::shared_ptr<boost::asio::io_service>               io_service_ = create_running_io_service();
++    std::shared_ptr<boost::asio::io_context>               io_service_ = create_running_io_service();
+     video_format_repository                                video_format_repository_;
+     accelerator::accelerator                               accelerator_;
+     std::shared_ptr<amcp::amcp_command_repository>         amcp_command_repo_;
+@@ -152,7 +152,7 @@
+ 
+     ~impl()
+     {
+-        std::weak_ptr<boost::asio::io_service> weak_io_service = io_service_;
++        std::weak_ptr<boost::asio::io_context> weak_io_service = io_service_;
+         io_service_.reset();
+         predefined_osc_subscriptions_.clear();
+         osc_client_.reset();
+
+--- a/protocol/util/AsyncEventServer.cpp   2025-06-30 20:31:30.582435735 +0200
++++ b/protocol/util/AsyncEventServer.cpp   2025-06-30 20:32:27.197621011 +0200
+@@ -49,7 +49,7 @@
+     using send_queue         = tbb::concurrent_queue<std::string>;
+ 
+     const spl::shared_ptr<tcp::socket>       socket_;
+-    std::shared_ptr<boost::asio::io_service> service_;
++    std::shared_ptr<boost::asio::io_context> service_;
+     const std::wstring                       listen_port_;
+     const spl::shared_ptr<connection_set>    connection_set_;
+     protocol_strategy_factory<char>::ptr     protocol_factory_;
+@@ -114,7 +114,7 @@
+     };
+ 
+   public:
+-    static spl::shared_ptr<connection> create(std::shared_ptr<boost::asio::io_service>    service,
++    static spl::shared_ptr<connection> create(std::shared_ptr<boost::asio::io_context>    service,
+                                               spl::shared_ptr<tcp::socket>                socket,
+                                               const protocol_strategy_factory<char>::ptr& protocol,
+                                               spl::shared_ptr<connection_set>             connection_set)
+@@ -143,13 +143,13 @@
+     {
+         send_queue_.push(std::move(data));
+         auto self = shared_from_this();
+-        service_->dispatch([=] { self->do_write(); });
++        boost::asio::dispatch(*service_, [=] { self->do_write(); });
+     }
+ 
+     void disconnect()
+     {
+         std::weak_ptr<connection> self = shared_from_this();
+-        service_->dispatch([=] {
++        boost::asio::dispatch(*service_, [=] {
+             auto strong = self.lock();
+ 
+             if (strong)
+@@ -197,7 +197,7 @@
+         socket_->close(ec);
+     }
+ 
+-    connection(const std::shared_ptr<boost::asio::io_service>& service,
++    connection(const std::shared_ptr<boost::asio::io_context>& service,
+                const spl::shared_ptr<tcp::socket>&             socket,
+                const protocol_strategy_factory<char>::ptr&     protocol_factory,
+                const spl::shared_ptr<connection_set>&          connection_set)
+@@ -272,13 +272,13 @@
+ 
+ struct AsyncEventServer::implementation : public spl::enable_shared_from_this<implementation>
+ {
+-    std::shared_ptr<boost::asio::io_service> service_;
++    std::shared_ptr<boost::asio::io_context> service_;
+     tcp::acceptor                            acceptor_;
+     protocol_strategy_factory<char>::ptr     protocol_factory_;
+     spl::shared_ptr<connection_set>          connection_set_;
+     std::vector<lifecycle_factory_t>         lifecycle_factories_;
+ 
+-    implementation(std::shared_ptr<boost::asio::io_service>    service,
++    implementation(std::shared_ptr<boost::asio::io_context>    service,
+                    const protocol_strategy_factory<char>::ptr& protocol,
+                    unsigned short                              port)
+         : service_(std::move(service))
+@@ -301,7 +301,7 @@
+     {
+         auto conns_set = connection_set_;
+ 
+-        service_->post([conns_set] {
++        boost::asio::post(*service_, [conns_set] {
+             auto connections = *conns_set;
+             for (auto& connection : connections)
+                 connection->stop();
+@@ -346,11 +346,11 @@
+     void add_client_lifecycle_object_factory(const lifecycle_factory_t& factory)
+     {
+         auto self = shared_from_this();
+-        service_->post([=] { self->lifecycle_factories_.push_back(factory); });
++        boost::asio::post(*service_, [=] { self->lifecycle_factories_.push_back(factory); });
+     }
+ };
+ 
+-AsyncEventServer::AsyncEventServer(std::shared_ptr<boost::asio::io_service>    service,
++AsyncEventServer::AsyncEventServer(std::shared_ptr<boost::asio::io_context>    service,
+                                    const protocol_strategy_factory<char>::ptr& protocol,
+                                    unsigned short                              port)
+     : impl_(new implementation(std::move(service), protocol, port))
+
+--- a/protocol/util/AsyncEventServer.h   2025-06-30 20:32:41.734084743 +0200
++++ b/protocol/util/AsyncEventServer.h   2025-06-30 20:32:58.221701167 +0200
+@@ -36,7 +36,7 @@
+ class AsyncEventServer
+ {
+   public:
+-    explicit AsyncEventServer(std::shared_ptr<boost::asio::io_service>    service,
++    explicit AsyncEventServer(std::shared_ptr<boost::asio::io_context>    service,
+                               const protocol_strategy_factory<char>::ptr& protocol,
+                               unsigned short                              port);
+     ~AsyncEventServer();
+
+--- a/protocol/util/http_request.cpp   2025-06-30 20:33:18.030511604 +0200
++++ b/protocol/util/http_request.cpp   2025-06-30 20:34:00.389703721 +0200
+@@ -16,12 +16,11 @@
+ 
+     HTTPResponse res;
+ 
+-    asio::io_service io_service;
++    asio::io_context io_service;
+ 
+     // Get a list of endpoints corresponding to the server name.
+-    tcp::resolver           resolver(io_service);
+-    tcp::resolver::query    query(host, port, boost::asio::ip::resolver_query_base::numeric_service);
+-    tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
++    tcp::resolver               resolver(io_service);
++    tcp::resolver::results_type endpoint_iterator = resolver.resolve(host, port, boost::asio::ip::resolver_query_base::numeric_service);
+ 
+     // Try each endpoint until we successfully establish a connection.
+     tcp::socket               socket(io_service);
+
+--- a/protocol/osc/client.cpp   2025-06-30 20:34:17.702326814 +0200
++++ b/protocol/osc/client.cpp   2025-06-30 20:34:39.437720910 +0200
+@@ -81,7 +81,7 @@
+     std::thread       thread_;
+ 
+   public:
+-    impl(std::shared_ptr<boost::asio::io_service> service)
++    impl(std::shared_ptr<boost::asio::io_context> service)
+         : service_(std::move(service))
+         , socket_(*service_, udp::v4())
+         , buffer_(1000000)
+
+--- a/modules/artnet/consumer/artnet_consumer.cpp   2025-06-30 20:35:15.230619446 +0200
++++ b/modules/artnet/consumer/artnet_consumer.cpp   2025-06-30 20:35:37.685364746 +0200
+@@ -77,7 +77,7 @@
+ 
+         std::string host_ = u8(this->config.host);
+         remote_endpoint =
+-            boost::asio::ip::udp::endpoint(boost::asio::ip::address::from_string(host_), this->config.port);
++            boost::asio::ip::udp::endpoint(boost::asio::ip::make_address(host_), this->config.port);
+ 
+         compute_fixtures();
+     }
+@@ -183,7 +183,7 @@
+     std::thread       thread_;
+     std::atomic<bool> abort_request_{false};
+ 
+-    io_service    io_service_;
++    io_context    io_service_;
+     udp::socket   socket;
+     udp::endpoint remote_endpoint;
+ 
+
+--- a/accelerator/StdAfx.h   2025-06-30 20:36:43.926716566 +0200
++++ b/accelerator/StdAfx.h   2025-06-30 20:37:44.885876283 +0200
+@@ -6,7 +6,6 @@
+ #include <boost/asio/deadline_timer.hpp>
+ #include <boost/asio/dispatch.hpp>
+ #include <boost/asio/io_context.hpp>
+-#include <boost/asio/io_service.hpp>
+ #include <boost/asio/post.hpp>
+ #include <boost/asio/spawn.hpp>
+ #include <boost/property_tree/ptree_fwd.hpp>
+--- a/protocol/amcp/AMCPCommandsImpl.cpp   2025-06-30 21:12:08.104257788 +0200
++++ b/protocol/amcp/AMCPCommandsImpl.cpp   2025-06-30 21:12:38.815467910 +0200
+@@ -1673,7 +1673,7 @@
+     }
+ 
+     auto subscription = ctx.static_context->osc_client->get_subscription_token(
+-        udp::endpoint(address_v4::from_string(u8(ctx.client->address())), port));
++        udp::endpoint(make_address_v4(u8(ctx.client->address())), port));
+ 
+     ctx.client->add_lifecycle_bound_object(get_osc_subscription_token(port), subscription);
+ 
+
+--- a/shell/server.cpp   2025-06-30 20:36:43.926716566 +0200
++++ b/shell/server.cpp   2025-06-30 20:37:44.885876283 +0200
+@@ -68,8 +68,8 @@ std::shared_ptr<boost::asio::io_context> create_running_io_service()
+     auto service = std::make_shared<boost::asio::io_context>();
+     // To keep the io_context::run() running although no pending async
+     // operations are posted.
+-    auto work      = std::make_shared<boost::asio::io_context::work>(*service);
+-    auto weak_work = std::weak_ptr<boost::asio::io_context::work>(work);
++    auto work      = std::make_shared<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>>(service->get_executor());
++    auto weak_work = std::weak_ptr<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>>(work);
+     auto thread    = std::make_shared<std::thread>([service, weak_work] {
+         while (auto strong = weak_work.lock()) {
+             try {
+@@ -303,7 +303,7 @@ struct server::impl
+                 const auto port    = ptree_get<unsigned short>(predefined_client.second, L"port");
+ 
+                 boost::system::error_code ec;
+-                auto                      ipaddr = address_v4::from_string(u8(address), ec);
++                auto                      ipaddr = make_address_v4(u8(address), ec);
+                 if (!ec)
+                     predefined_osc_subscriptions_.push_back(
+                         osc_client_->get_subscription_token(udp::endpoint(ipaddr, port)));
+@@ -319,7 +319,7 @@ struct server::impl
+ 
+                     return std::make_pair(std::wstring(L"osc_subscribe"),
+                                           osc_client_->get_subscription_token(
+-                                              udp::endpoint(address_v4::from_string(ipv4_address), default_port)));
++                                              udp::endpoint(make_address_v4(ipv4_address), default_port)));
+                 });
+     }
+ 
