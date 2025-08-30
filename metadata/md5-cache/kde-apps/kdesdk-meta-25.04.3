@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=KDE SDK - merge this to pull in all kdesdk-derived packages
+EAPI=8
+HOMEPAGE=https://apps.kde.org/categories/development/
+IUSE=+git mercurial qt5 subversion
+KEYWORDS=amd64 arm64 ~x86
+LICENSE=metapackage
+RDEPEND=>=kde-apps/kdesdk-thumbnailers-25.04.3:* >=kde-apps/kompare-25.04.3:* >=kde-apps/libkomparediff2-25.04.3:* git? ( >=kde-apps/dolphin-plugins-git-25.04.3:* ) mercurial? ( >=kde-apps/dolphin-plugins-mercurial-25.04.3:* ) qt5? ( app-editors/okteta ) subversion? ( >=kde-apps/dolphin-plugins-subversion-25.04.3:* )
+SLOT=0
+_md5_=c05556d1ab2abd21fb7abb36b467a4c0
