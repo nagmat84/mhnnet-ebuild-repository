@@ -1,0 +1,15 @@
+BDEPEND=dev-util/patchelf app-alternatives/ninja >=dev-build/cmake-3.28.5
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=dev-cpp/tbb >=dev-libs/boost-1.67.0:* dev-libs/icu dev-libs/nss media-libs/freeimage media-libs/glew media-libs/libglvnd =media-libs/libsfml-2* media-libs/openal media-video/ffmpeg-compat:6= sys-libs/zlib x11-libs/libICE x11-libs/libSM x11-libs/libX11 x11-libs/libXext
+DESCRIPTION=CasparCG Server plays out professional graphics, audio and video to multiple outputs. It has been in 24/7 broadcast production since 2006.
+EAPI=8
+HOMEPAGE=https://casparcg.com/
+INHERIT=cmake ffmpeg-compat
+KEYWORDS=amd64
+LICENSE=GPL-3
+RDEPEND=dev-cpp/tbb >=dev-libs/boost-1.67.0:* dev-libs/icu dev-libs/nss media-libs/freeimage media-libs/glew media-libs/libglvnd =media-libs/libsfml-2* media-libs/openal media-video/ffmpeg-compat:6= sys-libs/zlib x11-libs/libICE x11-libs/libSM x11-libs/libX11 x11-libs/libXext
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/CasparCG/server/archive/refs/tags/v2.4.3-stable.tar.gz -> casparcg-server-2.4.3.tar.gz
+_eclasses_=cmake	2d36accef058c00889b1f93ea4bc4061	ffmpeg-compat	9fb95232cbc648b5a3556767a2a5030d	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_md5_=e25d5fd5677c2e1eecc9fc58ec1e8b48
