@@ -1,0 +1,9 @@
+DEFINED_PHASES=-
+DESCRIPTION=Pulls in required build tools for a build server
+EAPI=8
+HOMEPAGE=https://www.mhnnet.de/
+KEYWORDS=amd64
+LICENSE=metapackage
+RDEPEND=app-portage/getuto dev-util/debugedit
+SLOT=0
+_md5_=dae142aa304a67260ff80c75450b4369
