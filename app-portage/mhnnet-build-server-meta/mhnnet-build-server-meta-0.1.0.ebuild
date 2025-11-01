@@ -11,5 +11,6 @@ KEYWORDS="amd64"
 # dev-util/debugedit  is required by Portage features "compressdebug" and "splitdebug"
 #
 RDEPEND="
+ app-portage/getuto
  dev-util/debugedit
 "
