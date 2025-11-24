@@ -1,0 +1,26 @@
+app-crypt/certbot-dns-desec 1.3.2 1.3.2-r1: deSEC DNS Authenticator plugin for Certbot
+app-office/softmaker-office 2024.1214: SoftMaker Office - an office suite featuring a word processor (TextMaker), spreadsheets (PlanMaker) and slides software (Presentations)
+app-portage/mhnnet-build-server-meta 0.2.0: Pulls in required build tools for a build server
+app-portage/mhnnet-emerge-scripts 0.2.0-r1: A small assembly of helper scripts to manage Gentoo installations
+kde-apps/kdegraphics-meta 24.08.3 24.12.2 24.12.3 24.12.3-r1 25.04.2-r2 25.04.3 25.08.2 25.08.3: kdegraphics - merge this to pull in all kdegraphics-derived packages
+kde-apps/kdemultimedia-meta 24.08.3 24.12.2 24.12.3 25.04.2 25.04.3-r1 25.08.2 25.08.3-r1: kdemultimedia - merge this to pull in all kdemultimedia-derived packages
+kde-apps/kdenetwork-meta 24.08.3 24.12.2 24.12.3 25.04.2 25.04.3 25.08.2 25.08.3: kdenetwork - merge this to pull in all kdenetwork-derived packages
+kde-apps/kdepim-meta 24.08.3 24.12.2 24.12.3 25.04.2 25.04.3 25.08.2 25.08.3: KDE PIM - merge this to pull in all kdepim-derived packages
+kde-apps/kdesdk-meta 24.08.3 24.12.2 24.12.3 25.04.2 25.04.3 25.08.2 25.08.3: KDE SDK - merge this to pull in all kdesdk-derived packages
+kde-apps/kdeutils-meta 24.08.3-r1 24.12.2 24.12.3 25.04.2 25.04.3 25.08.2 25.08.3: kdeutils - merge this to pull in all kdeutils-derived packages
+media-gfx/qcad 3.32.2.0 3.32.3.1 3.32.3.1-r1: Open Source 2D CAD
+media-libs/libcamera 0.5.0 0.5.2: A complex camera support library for Linux, Android, and ChromeOS
+media-plugins/gst-plugins-icamerasrc-arl-twl-asl 1.0.0: Intel IPU6 camera source for GStreamer (Arrow Lake)
+media-plugins/gst-plugins-icamerasrc-mtl-rpl 1.0.0: Intel IPU6 camera source for GStreamer (Meteor Lake/Raptor Lake)
+media-video/casparcg-server 2.4.3-r1 2.4.3-r2 2.4.3-r3 2.4.3-r4: CasparCG Server plays out professional graphics, audio and video to multiple outputs. It has been in 24/7 broadcast production since 2006.
+media-video/ipu6 0.0.1: Meta-package and config files for IPU6 support
+media-video/pipewire 1.4.2 1.4.6-r1 1.4.7-r2: Multimedia processing graphs
+net-libs/webkit-gtk 2.44.4-r1 2.46.5-r1 2.48.3: Open source web browser engine
+net-misc/citrix-workspace 25.03.0.66: Citrix Workspace App
+sys-auth/desktop-meta 1.0: Pulls in required system utilities and deamons for desktop environments
+sys-firmware/ipu6-camera-bins-arl-twl-asl 1.0.0: Intel IPU6 camera binaries (Meteor/Raptor Lake)
+sys-firmware/ipu6-camera-bins-mtl-rpl 1.0.1: Intel IPU6 camera binaries (Meteor/Raptor Lake)
+sys-libs/ipu6-camera-hal-mtl-rpl 1.0.0: Intel IPU6 camera HAL (Meteor/Raptor Lake)
+virtual/gst-plugins-icamerasrc 1.0: Intel IPU6 camera HAL
+virtual/ipu6-camera-bins 1.0: Intel IPU6 camera binaries
+virtual/ipu6-camera-hal 1.0: Intel IPU6 camera HAL
