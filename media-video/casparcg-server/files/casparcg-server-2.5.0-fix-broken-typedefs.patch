@@ -1,0 +1,15 @@
+--- a/common/bit_depth.h   2026-04-12 12:36:03.208721149 +0200
++++ b/common/bit_depth.h   2026-04-12 12:36:41.255275583 +0200
+@@ -1,10 +1,11 @@
+ #pragma once
+ 
+ #include <memory>
++#include <cstdint>
+ 
+ namespace caspar { namespace common {
+ 
+-enum class bit_depth : uint8_t
++enum class bit_depth : std::uint8_t
+ {
+     bit8 = 0,
+     bit10,
