@@ -1,0 +1,10 @@
+--- a/core/frame/geometry.cpp   2026-04-12 12:01:28.484298683 +0200
++++ b/core/frame/geometry.cpp   2026-04-12 12:13:47.974825970 +0200
+@@ -21,6 +21,7 @@
+ #include "geometry.h"
+ 
+ #include <common/except.h>
++#include <boost/algorithm/string.hpp>
+ 
+ namespace caspar { namespace core {
+ 

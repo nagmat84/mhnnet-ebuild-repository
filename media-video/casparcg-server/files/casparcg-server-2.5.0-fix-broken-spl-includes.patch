@@ -1,0 +1,19 @@
+--- a/accelerator/ogl/util/context.h   2026-04-12 12:54:11.863170832 +0200
++++ b/accelerator/ogl/util/context.h   2026-04-12 12:55:42.401970716 +0200
+@@ -1,6 +1,6 @@
+ #pragma once
+ 
+-#include <memory>
++#include <common/memory.h>
+ 
+ namespace caspar::accelerator::ogl {
+ 
+@@ -20,7 +20,7 @@
+     struct impl;
+ 
+   private:
+-    spl::shared_ptr<impl> impl_;
++    caspar::spl::shared_ptr<impl> impl_;
+ };
+ 
+ } // namespace caspar::accelerator::ogl
