@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DESCRIPTION=A small assembly of helper scripts to manage Gentoo installations
+EAPI=8
+HOMEPAGE=https://github.com/nagmat84/mhnnet-emerge-scripts/
+KEYWORDS=amd64
+LICENSE=GPL-3
+RDEPEND=net-misc/rsync virtual/ssh
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/nagmat84/mhnnet-emerge-scripts/archive/refs/tags/v0.3.0.tar.gz -> mhnnet-emerge-scripts-0.3.0.tar.gz
+_md5_=1b2103120ba801e9eb7646d9bda56ced
