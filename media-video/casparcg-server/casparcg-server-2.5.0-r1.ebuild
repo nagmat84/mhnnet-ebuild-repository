@@ -27,7 +27,7 @@ RESTRICT="mirror"
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 # dev-cpp/tbb                  from src/CMakeModules/Bootstrap_Linux.cmake: FIND_PACKAGE (TBB REQUIRED)
 # >=dev-libs/boost-1.74.0:*    from src/CMakeModules/Bootstrap_Linux.cmake: FIND_PACKAGE (Boost 1.74.0)
