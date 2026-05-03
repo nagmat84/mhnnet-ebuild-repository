@@ -1,0 +1,11 @@
+--- a/CMakeModules/Bootstrap_Linux.cmake   2026-05-03 15:43:05.220849694 +0200
++++ b/CMakeModules/Bootstrap_Linux.cmake   2026-05-03 15:43:42.864241146 +0200
+@@ -30,7 +30,7 @@
+ if (USE_STATIC_BOOST)
+        SET (Boost_USE_STATIC_LIBS ON)
+ endif()
+-find_package(Boost 1.74.0 COMPONENTS system thread filesystem log_setup log locale regex date_time coroutine REQUIRED)
++find_package(Boost 1.90.0 COMPONENTS thread filesystem log_setup log locale regex date_time coroutine REQUIRED)
+ find_package(FFmpeg REQUIRED)
+ find_package(OpenGL REQUIRED COMPONENTS OpenGL GLX EGL)
+ find_package(GLEW REQUIRED)
