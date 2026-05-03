@@ -27,7 +27,7 @@ RESTRICT="mirror"
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 
 # dev-cpp/tbb                  from src/CMakeModules/Bootstrap_Linux.cmake: FIND_PACKAGE (TBB REQUIRED)
 # >=dev-libs/boost-1.74.0:*    from src/CMakeModules/Bootstrap_Linux.cmake: FIND_PACKAGE (Boost 1.74.0)
@@ -131,7 +131,7 @@ src_configure() {
 src_install() {
 	# Preliminary default step from the eclass, see `cmake_src_install`
 	debug-print-function ${FUNCNAME} "$@"
-
+	
 	# The function `cmake_src_install` from the eclass `cmake` would run
 	# ```
 	# DESTDIR="${D}" cmake_build install "$@"
@@ -139,7 +139,7 @@ src_install() {
 	# but this doesn't work as the build script does not provide the
 	# usual target `install`.
 	# Hence, we must take the necessary steps manually.
-
+	
 	# The Ninja build script creates the directory
 	# ```
 	# ${BUILD_DIR}/staging
@@ -162,9 +162,9 @@ src_install() {
 	# which we must not install again.
 	# So here we only collect the couple of project-specific libraries
 	# from the build directory manually and install them.
-
+	
 	pushd "${BUILD_DIR}" > /dev/null || die
-
+	
 	local CASPARCG_LIBS="
 		accelerator/libaccelerator.so
 		common/libcommon.so
@@ -178,20 +178,24 @@ src_install() {
 		modules/screen/libscreen.so
 		protocol/libprotocol.so
 	"
-
+	
+	local FFMPEG6_PREFIX_PATH=$(ffmpeg_compat_get_prefix 7)
+	
 	for CASPARCG_LIB in ${CASPARCG_LIBS}; do
 		dolib.so "${CASPARCG_LIB}"
+		patchelf --set-rpath ${FFMPEG6_PREFIX_PATH%/}/lib64:/usr/lib64 "${ED%/}/usr/lib64/"$(basename "${CASPARCG_LIB}")
 	done
-
+	
 	dobin shell/casparcg
+	patchelf --set-rpath ${FFMPEG6_PREFIX_PATH%/}/lib64:/usr/lib64 ${ED%/}/usr/bin/casparcg
 	popd > /dev/null || die
-
+	
 	dodoc ${S}/shell/casparcg.config
 	docompress -x /usr/share/doc/${PF}/casparcg.config
-
+	
 	insinto /usr/lib/systemd/user
 	doins "${FILESDIR}/casparcg-server.service"
-
+	
 	# Final default steps from the eclass, see `cmake_src_install`
 	pushd "${CMAKE_USE_DIR}" > /dev/null || die
 	einstalldocs
