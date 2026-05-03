@@ -27,7 +27,7 @@ RESTRICT="mirror"
 LICENSE="GPL-3"
 
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 # dev-cpp/tbb                  from src/CMakeModules/Bootstrap_Linux.cmake: FIND_PACKAGE (TBB REQUIRED)
 # >=dev-libs/boost-1.74.0:*    from src/CMakeModules/Bootstrap_Linux.cmake: FIND_PACKAGE (Boost 1.74.0)
@@ -53,7 +53,7 @@ RDEPEND="dev-cpp/tbb
 	media-libs/libglvnd
 	=media-libs/libsfml-2*
 	media-libs/openal
-	<media-video/ffmpeg-9:=
+	media-video/ffmpeg-compat:7=
 	sys-libs/zlib
 	x11-libs/libICE
 	x11-libs/libSM
@@ -68,6 +68,7 @@ PATCHES=(
 	"${FILESDIR}/${P}-fix-broken-typedefs.patch"
 	"${FILESDIR}/${P}-fix-broken-spl-includes.patch"
 	"${FILESDIR}/${P}-fix-linker-dependencies.patch"
+	"${FILESDIR}/${P}-fix-boost-1.90.patch"
 )
 
 # For variable $DOCS, see [Ebuild Writing - Variables](https://devmanual.gentoo.org/ebuild-writing/variables/index.html)
@@ -97,6 +98,18 @@ DOCS=(
 #     The option `USE_SYSTEM_CEF` is not documented upstream, but it is in `CMakeLists.txt`.
 #
 MYCMAKEARGS=" -DUSE_STATIC_BOOST=OFF -DENABLE_HTML=OFF -DUSE_SYSTEM_CEF=ON"
+
+# Caspar CG 2.5 depends on FFmpeg 7
+# Hence, this ebuild
+#  - inherits eclass `ffmpeg-compat`
+#  - depends on `media-video/ffmpeg-compat:7=`
+#  - and calls `ffmpeg_compat_setup 7` before the source code gets configured, see
+#    [FFMPEG-COMPAT.ECLASS](https://devmanual.gentoo.org/eclass-reference/ffmpeg-compat.eclass/index.html)
+src_configure() {
+       ffmpeg_compat_setup 7
+#      ffmpeg_compat_add_flags
+       cmake_src_configure
+}
 
 
 #
