@@ -10,5 +10,5 @@ RDEPEND=app-arch/tar app-arch/xz-utils net-misc/curl sys-libs/glibc sys-devel/gc
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://www.softmaker.net/down/softmaker-office-2024-1214-amd64.tgz
-_eclasses_=desktop	26d57169ca094c04be416993844ec8bc	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
+_eclasses_=desktop	e447b5f77146d69797e9f03ff177f3f1	xdg-utils	42869b3c8d86a70ef3cf75165a395e09
 _md5_=03d6582e1f64d2203da4d02ec89f6757
