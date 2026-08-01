@@ -1,0 +1,40 @@
+--- a/src/lib/telemetry.rs   2026-08-01 15:26:19.338714256 +0200
++++ b/src/lib/telemetry.rs   2026-08-01 15:27:36.087080359 +0200
+@@ -27,37 +27,6 @@
+ }
+ 
+ pub async fn track_event(name: &str, properties: serde_json::Value) {
+-    let client: &reqwest::Client = match &*CLIENT {
+-        Some(c) => c,
+-        None => return,
+-    };
+-    // Parse the connection string only once.
+-    let (i_key, ingest_base) = parse_connection_string();
+-    let url = format!("{}/v2/track", ingest_base);
+-
+-    let payload = TelemetryItem {
+-        name: "Microsoft.ApplicationInsights.Event".into(),
+-        time: Utc::now().to_rfc3339_opts(chrono::SecondsFormat::Millis, true),
+-        i_key,
+-        tags: serde_json::json!({ "ai.cloud.role": "desktop-app" }),
+-        data: serde_json::json!({ "baseType": "EventData",
+-                                   "baseData": { "name": name, "properties": properties }}),
+-    };
+-
+-    // Swallow errors – we never want to break the app because telemetry failed.
+-    let serial_payload = match serde_json::to_string(&payload) {
+-        Ok(p) => p,
+-        Err(e) => {
+-            log::trace!("Failed to serialize telemetry payload: {}", e);
+-            return;
+-        }
+-    };
+-    let _ = client
+-        .post(&url)
+-        .header("Content-Type", "application/x-json-stream")
+-        .body(serial_payload)
+-        .send()
+-        .await;
+ }
+ 
+ fn parse_connection_string() -> (String, String) {

@@ -1,0 +1,4 @@
+# The GUI unconditionally tries to open a TLS connection to localhost for unknown reasons.
+# See https://github.com/espressif/idf-im-ui/issues/1011.
+# So we mask the GUI variant for now.
+dev-embedded/espressif-eim gui
