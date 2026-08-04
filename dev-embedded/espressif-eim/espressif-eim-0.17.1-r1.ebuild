@@ -996,7 +996,7 @@ RDEPEND="
         dev-libs/libffi
         dev-libs/libgcrypt:0/20
         dev-libs/openssl
-	dev-python/pip
+        dev-python/pip
         dev-util/ccache
         dev-util/gperf
         dev-vcs/git
@@ -1011,7 +1011,7 @@ RDEPEND="
 BDEPEND="
         ${PYTHON_DEPS}
         || ( >=dev-lang/rust-${RUST_MIN_VER} >=dev-lang/rust-bin-${RUST_MIN_VER} )
-	dev-python/pip
+        dev-python/pip
 "
 
 # See https://devmanual.gentoo.org/quickstart/index.html#ebuild-with-patches
