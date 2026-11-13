@@ -1,0 +1,10 @@
+DEFINED_PHASES=-
+DESCRIPTION=kdeutils - merge this to pull in all kdeutils-derived packages
+EAPI=9
+HOMEPAGE=https://apps.kde.org/categories/utilities/
+IUSE=7zip gpg +kwallet lrz markdown plasma rar
+KEYWORDS=amd64
+LICENSE=metapackage
+RDEPEND=>=app-cdr/dolphin-plugins-mountiso-26.08.3:* >=app-cdr/isoimagewriter-26.08.3:* >=app-crypt/keepsecret-26.08.3:* >=app-crypt/keysmith-26.08.3 >=dev-libs/kweathercore-26.08.3:* >=kde-apps/ark-26.08.3:* >=kde-apps/filelight-26.08.3:* >=kde-apps/kate-26.08.3:* >=kde-apps/kcalc-26.08.3:* >=kde-apps/kcharselect-26.08.3:* >=kde-apps/kdebugsettings-26.08.3:* >=kde-apps/kdf-26.08.3:* >=kde-misc/kweather-26.08.3:* >=kde-misc/markdownpart-26.08.3:* >=sys-block/partitionmanager-26.08.3:* >=sys-libs/kpmcore-26.08.3:* gpg? ( >=kde-apps/kgpg-26.08.3:* ) kwallet? ( >=kde-apps/kwalletmanager-26.08.3:* ) plasma? ( >=kde-misc/kclock-26.08.3 ) markdown? ( >=app-editors/ghostwriter-26.08.3 ) 7zip? ( >=app-arch/7zip-24.09[symlink(+)] ) lrz? ( app-arch/lrzip ) rar? ( || ( app-arch/rar app-arch/unrar app-arch/unar ) )
+SLOT=0
+_md5_=bf199a4960ecc7db4bb240acb710c59a
